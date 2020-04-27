@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: mlab
+spec:
+ type: ExternalName
+ externalName: ds261648.mlab.com

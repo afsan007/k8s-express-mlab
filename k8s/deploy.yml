@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ creationTimestamp: null
+ labels:
+  run: app
+  app: express-app
+ name: expressApp
+spec:
+ replicas: 3
+ minReadySeconds: 30
+ selector:
+  matchLabels:
+   run: expressApp
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+   maxUnavailable: 1
+   maxSurge: 2
+ template:
+  metadata:
+   labels:
+    run: expressApp
+  spec:
+   restartPolicy: OnFailure
+   containers:
+    - image: afsan007/simple-express
+      name: expressApp
+      resources:
+       limits:
+        cpu: 250m
+        memory: 200Mi
+      livenessProbe:
+       failureThreshold: 3
+       initialDelaySeconds: 30
+       periodSeconds: 10
+       timeoutSeconds: 5
+       successThreshold: 1
+       httpGet:
+        path: /healthz
+        port: 3000
+      readinessProbe:
+       failureThreshold: 3
+       initialDelaySeconds: 30
+       periodSeconds: 10
+       timeoutSeconds: 1
+       successThreshold: 1
+       httpGet:
+        path: /healthz
+        port: 3000
+      args:
+       - |
+        npm start
+      ports:
+       - name: express-app
+         containerPort: 3000
+         protocol: TCP
+      env:
+       - name: MONGODB_USERNAME
+         valueFrom:
+          secretKeyRef:
+           key: mlab-credential
+           name: MONGODB_USERNAME
+       - name: MONGODB_PASSWORD
+         valueFrom:
+          secretKeyRef:
+           key: mlab-credential
+           name: MONGODB_PASSWORD
