@@ -5,7 +5,7 @@ metadata:
  labels:
   run: app
   app: express-app
- name: expressApp
+ name: express-app
 spec:
  replicas: 3
  minReadySeconds: 30
@@ -24,7 +24,7 @@ spec:
   spec:
    restartPolicy: OnFailure
    containers:
-    - image: afsan007/simple-express
+    - image: afsan007/express-with-mlab
       name: expressApp
       resources:
        limits:
@@ -59,10 +59,10 @@ spec:
        - name: MONGODB_USERNAME
          valueFrom:
           secretKeyRef:
-           key: mlab-credential
-           name: MONGODB_USERNAME
+           name: mlab-credential
+           key: MONGODB_USERNAME
        - name: MONGODB_PASSWORD
          valueFrom:
           secretKeyRef:
-           key: mlab-credential
-           name: MONGODB_PASSWORD
+           name: mlab-credential
+           key: MONGODB_PASSWORD
