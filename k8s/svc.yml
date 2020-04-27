@@ -3,7 +3,7 @@ kind: Service
 metadata:
  labels:
   run: app-svc
- name: expressApp-svc
+ name: express-app-svc
 spec:
  type: NodePort
  ports:

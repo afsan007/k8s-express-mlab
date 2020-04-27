@@ -11,7 +11,7 @@ spec:
  minReadySeconds: 30
  selector:
   matchLabels:
-   run: expressApp
+   run: express-app
  strategy:
   type: RollingUpdate
   rollingUpdate:
@@ -20,12 +20,12 @@ spec:
  template:
   metadata:
    labels:
-    run: expressApp
+    run: express-app
   spec:
-   restartPolicy: OnFailure
+   restartPolicy: Always
    containers:
     - image: afsan007/express-with-mlab
-      name: expressApp
+      name: express-app
       resources:
        limits:
         cpu: 250m
