@@ -1,5 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv').config()
+console.log(
+	`mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@${process.env.MLAB_URL}:61648/k8s-test`
+)
 mongoose.connect(
 	`mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@${process.env.MLAB_URL}:61648/k8s-test`,
 	{
@@ -41,3 +45,5 @@ app.listen(3000, () => {
     username: afsan007
     password: af930611040
 */
+// mongodb://afsan007:af930611040@ds261648.mlab.com:61648/k8s-test
+// mongodb://afsan007:af930611040@ds261648.mlab.com:61648/k8s-test
