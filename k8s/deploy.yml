@@ -56,13 +56,20 @@ spec:
          containerPort: 3000
          protocol: TCP
       env:
-       - name: MONGODB_USERNAME
+       - name: MLAB_USERNAME
          valueFrom:
           secretKeyRef:
            name: mlab-credential
-           key: MONGODB_USERNAME
-       - name: MONGODB_PASSWORD
+           key: MLAB_USERNAME
+
+       - name: MLAB_PASSWORD
          valueFrom:
           secretKeyRef:
            name: mlab-credential
-           key: MONGODB_PASSWORD
+           key: MLAB_PASSWORD
+
+       - name: MLAB_URL
+         valueFrom:
+          secretKeyRef:
+           name: mlab-credential
+           key: MLAB_URL
