@@ -3,24 +3,22 @@ const mongoose = require('mongoose')
 
 if (!process.env.ENV_PROD) require('dotenv').config()
 
-mongoose.connect(
-	`mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@${process.env.MLAB_URL}:61648/k8s-test`,
-	{
-		useUnifiedTopology: true,
-		useNewUrlParser: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-	}
+const mongodb_URL = `mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@${process.env.MLAB_URL}:61648/k8s-test`
+mongoose.connect(mongodb_URL, {
+	useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+})
+mongoose.connection.on('connected', () =>
+	console.log('[MongoDB] connection established successfully.')
 )
-mongoose.connection.on('connected', () => {
-	console.log('[MongoDB] connection established successfully')
-})
-mongoose.connection.on('error', err => {
-	console.log(`connection to mongo failed ${err}`)
-})
-mongoose.connection.on('disconnected', () => {
-	console.log('mongo db connection closed')
-})
+mongoose.connection.on('error', err =>
+	console.log(`[MongoDB] connection to mongo failed ${err}.`)
+)
+mongoose.connection.on('disconnected', () =>
+	console.log('[MongoDB] connection closed.')
+)
 mongoose.set('useCreateIndex', true)
 
 mongoose.Promise = global.Promise
@@ -38,9 +36,3 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
 	console.log('Listening on port 3000')
 })
-
-/*
-  DBpass:
-    username: afsan007
-    password: af930611040
-*/
