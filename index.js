@@ -3,7 +3,15 @@ const mongoose = require('mongoose')
 
 if (!process.env.ENV_PROD) require('dotenv').config()
 
+if (
+	process.env.MLAB_USERNAME &&
+	process.env.MLAB_PASSWORD &&
+	process.env.MLAB_URL
+) {
+	console.log('environment all set correctly')
+}
 const mongodb_URL = `mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@${process.env.MLAB_URL}:61648/k8s-test`
+
 mongoose.connect(mongodb_URL, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
