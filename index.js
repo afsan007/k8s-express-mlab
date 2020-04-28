@@ -10,9 +10,10 @@ mongoose.connect(mongodb_URL, {
 	useCreateIndex: true,
 	useFindAndModify: false,
 })
-mongoose.connection.on('connected', () =>
+mongoose.connection.on('connected', () => {
 	console.log('[MongoDB] connection established successfully.')
-)
+	if (process.env.testTravis) process.exit(0)
+})
 mongoose.connection.on('error', err =>
 	console.log(`[MongoDB] connection to mongo failed ${err}.`)
 )
