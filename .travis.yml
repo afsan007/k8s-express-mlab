@@ -1,7 +1,16 @@
-language: node_js
-node_js:
- - 12
+# language: node_js
+# node_js:
+#  - 12
+# before_install:
+#  - npm install
+# install:
+#  - npm start
+language: ruby
+
+services:
+ - docker
+
 before_install:
- - npm install
-install:
- - npm start
+ - docker run afsan007/express-with-mlab
+script:
+ - echo "everything is good"
