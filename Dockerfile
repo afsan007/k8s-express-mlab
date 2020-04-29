@@ -1,5 +1,5 @@
 # Specify a base image
-FROM node:14.0-slim
+FROM node:buster
 
 WORKDIR /usr/app
 
