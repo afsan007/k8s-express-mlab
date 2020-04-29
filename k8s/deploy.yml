@@ -49,6 +49,8 @@ spec:
         path: /healthz
         port: 3000
       args:
+       - '/bin/sh'
+       - '-c'
        - |
         npm start
       ports:
