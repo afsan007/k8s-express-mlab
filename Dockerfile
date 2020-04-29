@@ -1,5 +1,5 @@
 # Specify a base image
-FROM node:buster
+FROM node:current
 
 WORKDIR /usr/app
 
