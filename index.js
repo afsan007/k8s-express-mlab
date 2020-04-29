@@ -20,6 +20,7 @@ mongoose.connect(mongodb_URL, {
 })
 mongoose.connection.on('connected', () => {
 	console.log('[MongoDB] connection established successfully.')
+	console.log(process.env.testTravis)
 	if (process.env.testTravis) process.exit(0)
 })
 mongoose.connection.on('error', err =>

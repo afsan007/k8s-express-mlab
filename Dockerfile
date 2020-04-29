@@ -1,5 +1,5 @@
 # Specify a base image
-FROM node:current
+FROM node:14.0-slim
 
 WORKDIR /usr/app
 
